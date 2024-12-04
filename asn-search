@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -eu
+
+curl -s https://ftp.ripe.net/ripe/asnames/asn.txt | grep -i "$1" | awk '{print "AS"$1}'

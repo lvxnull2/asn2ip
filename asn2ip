@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -eu
+
+if [ "$#" -lt 1 ]; then
+  asns="/dev/stdin"
+else
+  asns="$1"
+fi
+
+while read -r asn; do
+  whois -h whois.radb.net -- "-i origin $asn" | awk '/^route/ {print $2}'
+done < "$asns"
